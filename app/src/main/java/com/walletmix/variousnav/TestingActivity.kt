@@ -32,9 +32,9 @@ class TestingActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         //custom appbar setup
         binding.toolbar.merchantName.setText(R.string.app_name)
-       binding.toolbar.ivLogout.setOnClickListener {
-           binding.root.openDrawer(GravityCompat.END)
-       }
+        binding.toolbar.ivLogout.setOnClickListener {
+            binding.root.openDrawer(GravityCompat.END)
+        }
 
         //navigation drawer setup
         val toggle =
@@ -56,7 +56,7 @@ class TestingActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         //bottom sheet setup
         binding.fab.setOnClickListener {
-            val view: View = layoutInflater.inflate(R.layout.item_bottom_sheet,null)
+            val view: View = layoutInflater.inflate(R.layout.item_bottom_sheet, null)
             val dialog = BottomSheetDialog(this)
             dialog.setContentView(view)
 
@@ -65,23 +65,24 @@ class TestingActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             val setting = view.findViewById<View>(R.id.setting)
             val home = view.findViewById<View>(R.id.home)
 
-            person.setOnClickListener{
-                openFragment(ProfileFragment())
+            person.setOnClickListener {
+                binding.bottomNavigationView.selectedItemId = R.id.nav_profile
                 dialog.dismiss()
+
             }
 
             share.setOnClickListener {
-                replaceFragment(SearchFragment())
+                binding.bottomNavigationView.selectedItemId = R.id.nav_search
                 dialog.dismiss()
             }
 
             setting.setOnClickListener {
-                replaceFragment(SettingFragment())
+                binding.bottomNavigationView.selectedItemId = R.id.nav_settings
                 dialog.dismiss()
             }
 
             home.setOnClickListener {
-                replaceFragment(HomeFragment())
+                binding.bottomNavigationView.selectedItemId = R.id.nav_home
                 dialog.dismiss()
             }
 
@@ -93,10 +94,10 @@ class TestingActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.dnav_home -> replaceFragment(HomeFragment())
-            R.id.dnav_profile -> openFragment(ProfileFragment())
-            R.id.dnav_search -> openFragment(SearchFragment())
-            R.id.dnav_settings -> openFragment(SettingFragment())
+            R.id.dnav_home ->  binding.bottomNavigationView.selectedItemId = R.id.nav_home
+            R.id.dnav_profile ->  binding.bottomNavigationView.selectedItemId = R.id.nav_profile
+            R.id.dnav_search ->  binding.bottomNavigationView.selectedItemId = R.id.nav_search
+            R.id.dnav_settings ->  binding.bottomNavigationView.selectedItemId = R.id.nav_settings
         }
         binding.root.closeDrawer(GravityCompat.END)
         return true
